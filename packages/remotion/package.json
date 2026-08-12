@@ -1,0 +1,26 @@
+{
+  "name": "@viraltier/remotion",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "preview": "remotion preview src/index.ts",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.220",
+    "@remotion/renderer": "^4.0.220",
+    "remotion": "^4.0.220",
+    "@viraltier/types": "*",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5.5.4"
+  }
+}

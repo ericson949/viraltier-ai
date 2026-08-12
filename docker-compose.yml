@@ -1,0 +1,42 @@
+services:
+  # ── Redis (BullMQ queue for the worker) ─────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: viraltier_redis
+    restart: unless-stopped
+    ports:
+      - '6381:6379'
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Video Worker (FFmpeg + Remotion + BullMQ) ────────────────────────────────
+  worker:
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    container_name: viraltier_worker
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - CONVEX_HTTP_URL=${CONVEX_HTTP_URL}
+      - WORKER_SECRET=${WORKER_SECRET}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_BASE_URL=${OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}
+      - NODE_ENV=production
+    volumes:
+      - worker_tmp:/tmp/viraltier
+    tmpfs:
+      - /tmp/renders
+
+volumes:
+  redis_data:
+  worker_tmp:

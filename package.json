@@ -1,0 +1,27 @@
+{
+  "name": "viraltier-ai",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "worker:dev": "turbo dev --filter=@viraltier/worker",
+    "web:dev": "turbo dev --filter=@viraltier/web",
+    "convex:dev": "convex dev"
+  },
+  "devDependencies": {
+    "convex": "^1.16.5",
+    "prettier": "^3.9.6",
+    "turbo": "^2.10.9",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.8.2"
+}

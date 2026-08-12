@@ -1,0 +1,16 @@
+{
+  "name": "@viraltier/convex",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "convex dev",
+    "deploy": "convex deploy",
+    "seed": "convex run seed:seedMusicTracks"
+  },
+  "dependencies": {
+    "@auth/core": "^0.34.2",
+    "@convex-dev/auth": "^0.0.71",
+    "convex": "^1.16.5",
+    "@viraltier/types": "*"
+  }
+}
